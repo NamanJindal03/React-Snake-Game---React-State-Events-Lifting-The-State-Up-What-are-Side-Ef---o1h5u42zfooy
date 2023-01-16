@@ -10,7 +10,8 @@ const App = () =>  {
   const [dotLocation, setDotLocation] = useState([0,0]);
   const [snakeSpeed, setSnakeSpeed] = useState(5000);
   const [direction, setDirection] = useState('right');
-  const [snakeDots, setSnakeDots] = useState([[0,0], [0,2]])
+  const [snakeDots, setSnakeDots] = useState([[0,0], [0,2]]);
+  console.log('main', snakeDots);
   const generateFood = () => {
     //TODO: The food on regeration cannot come under the snake body
     const top = Math.floor(Math.random() *50) *2;
@@ -48,13 +49,12 @@ const App = () =>  {
   //   setSnakeDots([...initialPosition])
   // }
   const moveSnake = () => {
-    let dots = [...snakeDots];
-    console.log(dots)
-    let head = dots[dots.length - 1];
-    console.log(head)
+    //debugger;
+    console.log(snakeDots);
+    let head = snakeDots[snakeDots.length - 1];
+    console.log('head', head)
     switch(direction){
       case 'right':
-        console.log(head)
         head = [head[0], head[1]+2]
         break;
       case 'down':
@@ -67,18 +67,13 @@ const App = () =>  {
         head = [head[0]-2, head[1]]
         break;
     }
-    console.log(head)
+    console.log('after head', head)
+    let dots = [...snakeDots];
     dots.push(head);
     dots.shift();
-    setSnakeDots(() => {
-      return dots
-    })
+    console.log(dots)
+    setSnakeDots(dots)
   }
-  // const increaseSnakeLenght = () = {
-
-  // }
-
-
   useEffect(()=>{
     generateFood();
     setInterval(()=>{
